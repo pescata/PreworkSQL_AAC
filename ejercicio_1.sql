@@ -40,16 +40,47 @@ CREATE TABLE IF NOT EXISTS public.pedidos (
 6. Insertar un nuevo pedido en la tabla "Pedidos" con id=1, cliente_id=1,
 producto="Camiseta" y cantidad=2.
 */
-
+INSERT INTO public.pedidos (id,cliente_id,producto,cantidad)
+VALUES (1,1,'Camiseta',2)
 /*
 7. Actualizar la cantidad del pedido con id=1 a 3.
+*/
+UPDATE public.pedidos
+SET cantidad=3
+WHERE id=1
+/*
 8. Eliminar el pedido con id=1 de la tabla "Pedidos".
+*/
+DELETE FROM public.pedidos
+WHERE id=1
+/*
 9. Crear una tabla llamada "Productos" con las columnas: id (entero, clave
 primaria), nombre (texto) y precio (decimal).
+*/
+CREATE TABLE IF NOT EXISTS public.productos(
+	id INT PRIMARY KEY,
+	nombre VARCHAR(255),
+	precio DECIMAL
+)
+/*
 10. Insertar varios productos en la tabla "Productos" con diferentes valores.
+*/
+INSERT INTO public.productos (id,nombre,precio)
+VALUES (
+(1,'Camiseta',9.95),
+(2,'Sudadera',24.95),
+(3,'Polo',35)
+)
+/*
 11. Consultar todos los clientes de la tabla "Clientes".
+*/
+SELECT * FROM public.clientes
+/*
 12. Consultar todos los pedidos de la tabla "Pedidos" junto con los nombres de los
 clientes correspondientes.
+*/
+
+/*
 13. Consultar los productos de la tabla "Productos" cuyo precio sea mayor a $50.
 14. Consultar los pedidos de la tabla "Pedidos" que tengan una cantidad mayor o
 igual a 5.
