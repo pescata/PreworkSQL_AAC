@@ -79,22 +79,78 @@ SELECT * FROM public.clientes
 12. Consultar todos los pedidos de la tabla "Pedidos" junto con los nombres de los
 clientes correspondientes.
 */
-
+SELECT 
+p.id,
+p.cliente_id,
+p.producto,
+p.cantidad,
+c.nombre
+FROM public.pedidos p
+LEFT JOIN public.clientes c
+ON p.cliente_id = c.id
 /*
 13. Consultar los productos de la tabla "Productos" cuyo precio sea mayor a $50.
+*/
+SELECT * FROM public.productos
+WHERE precio > 50
+/*
 14. Consultar los pedidos de la tabla "Pedidos" que tengan una cantidad mayor o
 igual a 5.
+*/
+SELECT * FROM public.productos
+WHERE precio > 5
+/*
 15. Consultar los clientes de la tabla "Clientes" cuyo nombre empiece con la letra
 "A".
+*/
+SELECT * FROM public.clientes
+WHERE nombre LIKE 'A%' 
+/*
 16. Realizar una consulta que muestre el nombre del cliente y el total de pedidos
 realizados por cada cliente.
+*/
+SELECT 
+c.nombre,
+p.cantidad
+FROM public.clientes c
+LEFT JOIN public.pedidos p
+ON c.id = p.cliente_id
+/*
 17. Realizar una consulta que muestre el nombre del producto y la cantidad total de
 pedidos de ese producto.
+*/
+SELECT 
+po.nombre,
+pe.cantidad
+FROM public.productos po
+LEFT JOIN public.pedidos pe
+ON po.nombre = pe.producto
+/*
 18. Agregar una columna llamada "fecha" a la tabla "Pedidos" de tipo fecha.
+*/
+ALTER TABLE public.pedidos
+ADD fecha DATE 
+/*
 19. Agregar una clave externa a la tabla "Pedidos" que haga referencia a la tabla
 "Productos" en la columna "producto".
+*/
+ALTER TABLE public.productos
+ADD CONSTRAINT valor_unico_nombres
+UNIQUE (nombre)
+
+ALTER TABLE public.pedidos
+ADD CONSTRAINT FK_nombres_productos
+FOREIGN KEY (producto) REFERENCES productos(nombre)
+/*
 20. Realizar una consulta que muestre los nombres de los clientes, los nombres de
 los productos y las cantidades de los pedidos donde coincida la clave externa.
 */
-
-
+SELECT 
+c.nombre as cliente,
+po.nombre as producto,
+pe.cantidad as cantidad
+FROM public.clientes c
+LEFT JOIN public.pedidos pe 
+ON c.id = pe.cliente_id
+LEFT JOIN public.productos po 
+ON pe.producto = po.nombre
