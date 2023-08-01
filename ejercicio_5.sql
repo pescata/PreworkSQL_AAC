@@ -101,58 +101,71 @@ VALUES (1,1)
 18. Actualiza el producto_id del detalle de pedido con pedido_id=1 a 2 en la tabla
 "DetallesPedido".
 */
-
+UPDATE public.DetallesPedido
+SET producto_id = 2
+WHERE pedido_id = 1
 /*
 19. Elimina el detalle de pedido con pedido_id=1 de la tabla "DetallesPedido".
 */
-
+DELETE FROM public.DetallesPedido
+WHERE pedido_id = 1
 /*
 20. Lee todos los detalles de pedido de la tabla "DetallesPedido".
 */
-
+SELECT * FROM public.DetallesPedido
 /*
 21. Realiza una consulta para obtener todos los clientes y sus pedidos
 correspondientes utilizando un inner join.
 */
-
+SELECT c.id, c.nombre, pe.id FROM public.Clientes c
+INNER JOIN public.pedidos pe ON c.id = pe.cliente_id
 /*
 22. Realiza una consulta para obtener todos los clientes y sus pedidos
 correspondientes utilizando un left join.
 */
-
+SELECT c.id, c.nombre, pe.id FROM public.Clientes c
+LEFT JOIN public.pedidos pe ON c.id = pe.cliente_id
 /*
 23. Realiza una consulta para obtener todos los productos y los detalles de pedido
 correspondientes utilizando un inner join.
 */
-
+SELECT p.id, p.nombre, d.id FROM public.Productos p
+INNER JOIN public.Detallespedido d ON p.id = d.producto_id
 /*
 24. Realiza una consulta para obtener todos los productos y los detalles de pedido
 correspondientes utilizando un left join.
 */
-
+SELECT p.id, p.nombre, d.id FROM public.Productos p
+LEFT JOIN public.Detallespedido d ON p.id = d.producto_id
 /*
 25. Crea una nueva columna llamada "telefono" de tipo cadena de texto en la tabla
 "Clientes".
 */
-
+ALTER TABLE public.clientes
+ADD telefono VARCHAR(255)
 /*
 26. Modifica la columna "telefono" en la tabla "Clientes" para cambiar su tipo de
 datos a entero.
 */
-
+ALTER TABLE public.clientes
+ALTER COLUMN telefono INT
 /*
 27. Elimina la columna "telefono" de la tabla "Clientes".
 */
-
+ALTER TABLE public.clientes 
+DROP COLUMN tfno
 /*
 28. Cambia el nombre de la tabla "Clientes" a "Usuarios".
 */
-
+ALTER TABLE public.clientes RENAME TO usuarios
 /*
 29. Cambia el nombre de la columna "nombre" en la tabla "Usuarios" a
 "nombre_completo".
 */
-
+ALTER TABLE public.usuarios
+RENAME COLUMN nombre TO nombre_completo
 /*
 30. Agrega una restricción de clave primaria a la columna "id" en la tabla "Usuarios".
 */
+ALTER TABLE public.usuarios
+ADD PRIMARY KEY (id)
